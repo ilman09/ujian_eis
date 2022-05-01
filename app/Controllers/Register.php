@@ -2,13 +2,16 @@
 
 namespace App\Controllers;
 
+use App\Models\User;
 use CodeIgniter\RESTful\ResourceController;
-use App\Models\UserModel; 
+use App\Models\UserModel;
 
 class Register extends ResourceController
 {
-    public function __construct() {
+    public function __construct()
+    {
         $this->userModel = new UserModel();
+        $this->user = new User();
     }
     /**
      * Return an array of resource objects, themselves in array format
@@ -50,11 +53,11 @@ class Register extends ResourceController
         $payload = [
             "name" => $this->request->getPost('name'),
             "email" => $this->request->getPost('email'),
-            "password" => md5($this->request->getPost('password')),
+            "password" => sha1(md5($this->request->getPost('password'))),
         ];
 
-        $this->userModel->insert($payload);
-        return redirect()->to('/login');
+        $this->user->put($payload);
+        return redirect()->to('login');
     }
 
     /**

@@ -5,31 +5,27 @@
         <div class="col-12">
             <h5 class="mb-4">Register to continue</h5>
 
-            <form action="/register" method="post">
+            <form action="<?= base_url('register/create') ?>" method="post">
                 <div class="form-group">
                     <label for="example-email">Name</label>
-                    <input type="text" class="form-control" id="example-email" aria-describedby="emailHelp" 
-                        placeholder="Enter name" required name="name">
+                    <input type="text" class="form-control" id="example-email" aria-describedby="emailHelp" placeholder="Enter name" required name="name">
                 </div>
 
                 <div class="form-group">
                     <label for="example-email">Email</label>
-                    <input type="text" class="form-control" id="example-email" aria-describedby="emailHelp" 
-                        placeholder="Enter email" required name="email">
+                    <input type="text" class="form-control" id="example-email" aria-describedby="emailHelp" placeholder="Enter email" required name="email">
                 </div>
 
                 <div class="form-group">
                     <label for="example-password">Password</label>
-                    <input type="password" class="form-control" id="example-password" aria-describedby="emailHelp" 
-                        placeholder="Enter password" required name="password">
+                    <input type="password" class="form-control" id="example-password" aria-describedby="emailHelp" placeholder="Enter password" required name="password">
                 </div>
 
                 <div class="form-group">
                     <label for="example-password-confirmation">Password Confirmation</label>
-                    <input type="password" class="form-control" id="example-password-confirmation" aria-describedby="emailHelp" 
-                        placeholder="Enter password" required name="password_confirmation">
+                    <input type="password" class="form-control" id="example-password-confirmation" aria-describedby="emailHelp" placeholder="Enter password" required name="password_confirmation">
                 </div>
-<br>
+                <br>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>

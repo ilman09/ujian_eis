@@ -2,16 +2,19 @@
 
 namespace App\Controllers;
 
+use App\Models\User;
 use CodeIgniter\RESTful\ResourceController;
-use App\Models\UserModel; 
+use App\Models\UserModel;
 
 class Login extends ResourceController
 {
     protected $session;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->userModel = new UserModel();
         $this->session = \Config\Services::session();
+        $this->user = new User();
     }
     /**
      * Return an array of resource objects, themselves in array format
@@ -21,6 +24,23 @@ class Login extends ResourceController
     public function index()
     {
         echo view('auth/login');
+    }
+
+    public function login()
+    {
+        $email = $this->request->getVar('email');
+        $password = $this->request->getVar('password');
+
+        $cek = $this->user->get(['email' => $email, 'password' => sha1(md5($password))])->countAllResults(false);
+
+        if ($cek == 1) {
+            $data = $this->user->getrow(['email' => $email, 'password' => sha1(md5($password))]);
+            session()->set($data);
+            return redirect()->to(base_url());
+        } else {
+            session()->setFlashData("errors", "Email or password is invalid");
+            return redirect()->to(base_url('login'));
+        }
     }
 
     /**
@@ -63,34 +83,34 @@ class Login extends ResourceController
                 ],
             ]);
 
-            if(!$validate) {
+            if (!$validate) {
                 session()->setFlashData("errors", $this->validator->listErrors());
                 return redirect()->to(previous_url())->withInput();
             }
-    
+
             $email = $this->request->getPost('email');
             $password = $this->request->getPost('password');
-    
+
             $user = $this->userModel
-                    ->where('email', $email)
-                    ->first();
-    
-            if(!$user) {
+                ->where('email', $email)
+                ->first();
+
+            if (!$user) {
                 session()->setFlashData("errors", "Email or password is invalid");
                 return redirect()->to(previous_url())->withInput();
             }
-    
-            if(md5($password) != $user['password']) {
+
+            if (md5($password) != $user['password']) {
                 session()->setFlashData("errors", "Email or password is invalid");
                 return redirect()->to(previous_url())->withInput();
             }
-    
+
             $this->session->set('id', $user['id']);
             $this->session->set('name', $user['name']);
             $this->session->set('loggedIn', true);
-    
+
             return redirect()->to('/beranda');
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             return redirect()->to(previous_url());
         }
     }

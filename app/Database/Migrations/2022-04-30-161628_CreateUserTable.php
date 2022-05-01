@@ -29,11 +29,11 @@ class CreateUserTable extends Migration
         $this->forge->addKey('id', true);
         $this->forge->addKey('email', false, true); // Uniqe Key
         $this->forge->addField($fields);
-        $this->forge->createTable('users', true); //If NOT EXISTS create table products
+        $this->forge->createTable('users', true); //If NOT EXISTS create table p
     }
 
     public function down()
     {
-        $this->forge->dropTable('users', true); //If Exists drop table products
+        $this->forge->dropTable('users', true); //If Exists drop table product
     }
 }

@@ -25,6 +25,11 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+  <style type='text/css'>
+    .box-widget {
+      margin-bottom: 30px;
+    }
+  </style>
 </head>
 
 <body>
@@ -33,21 +38,26 @@
   <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo me-auto"><a href="index.html">DAR.SOCIALMEDIA</a></h1>
+      <h1 class="logo me-auto"><a href="/welcome_message">DAR.SOCIALMEDIA</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto active" href="#splash">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li
-          <li><a class="nav-link scrollto" href="#post">Post</a></li
-          <li><a class="getstarted scrollto" href="#about">+ Post</a></li>
-            <ul>
-              
-         
-          <li><a class="getstarted scrollto" href="#about">MASUK</a></li>
-		  <li><a class="getstarted scrollto" href="#about">DAFTAR</a></li>
+          <?php if (session('name') != null || session('name') != '') {
+            echo " <li><a class='getstarted scrollto' href='/logout'>Keluar</a></li>";
+          } else {
+            echo ' <li><a class="getstarted scrollto" href="/login">MASUK</a></li>';
+            echo '  <li><a class="getstarted scrollto" href="/register">DAFTAR</a></li>';
+          }
+          ?>
+
+
+
+
+
+
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -64,7 +74,7 @@
           <h1>Memudahkan Pengguna Untuk Mengekspresikan Dirinya</h1>
           <h2>Kami dari tim dar.socialmedia telah menghandle ini dengan baik</h2>
           <div class="d-flex justify-content-center justify-content-lg-start">
-          
+
           </div>
         </div>
         <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
@@ -76,106 +86,113 @@
   </section><!-- End Splash -->
 
 
-<!-- ======= isian  ======= -->
-<section id="post" class="post">
-<div class="page-content page-container" id="page-content">
-    <div class="padding">
-        <div class="row container d-flex justify-content-center">
-            <div class="col-md-6">
-                <div class="box box-widget">
-                    <div class="box-header with-border">
-                        <div class="user-block"> <img class="img-circle" src="https://img.icons8.com/color/36/000000/guest-male.png" alt="User Image"> 
-                        <span class="username"><a href="#" data-abc="true">Kun_ku_Kun</a></span> <span class="description">Public - 7:30 PM Today</span> </div>
-                        <div class="box-tools"> <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="" data-original-title="Mark as read"> 
-                            <button type="button" class="bx bx-trash"></button> 
-                            <button type="button" class="bx bx-pencil"></button> </div>
-                    </div>
-                    <div class="box-body"> <img class="img-responsive pad" src="https://cdn-image.hipwee.com/wp-content/uploads/2016/04/hipwee-alam-750x422.jpg" alt="Photo">
-                        <p>Sampai bertemu dititik terindah menurut takdir.</p> 
-                        <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button> 
-                        <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</button> 
-                        <span class="pull-right text-muted">1287 likes - 2 comments</span>
-                    </div>
-                    <div class="box-footer box-comments">
-                        <div class="box-comment"> <img class="img-circle img-sm" src="https://img.icons8.com/office/36/000000/person-female.png" alt="User Image">
-                            <div class="comment-text"> <span class="username"> Tami Zuu <span class="text-muted pull-right">8:03 PM Today</span> </span> Siapa tu yang di tunggu dititik itu wkwkwk </div>
-                        </div>
-                        <div class="box-comment"> <img class="img-circle img-sm" src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="User Image">
-                            <div class="comment-text"> <span class="username"> Smit Janson <span class="text-muted pull-right">8:03 PM Today</span> </span> Slebew gak sehh. </div>
-                        </div>
-                    </div>
-                    <div class="box-footer">
-                        <form action="#" method="post"> <img class="img-responsive img-circle img-sm" src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="Alt Text">
-                            <div class="img-push"> <input type="text" class="form-control input-sm" placeholder="Press enter to post comment " </div>
-                        </form>
-                    </div>
-                </div>
+  <div class="page-content page-container row container" id="page-content">
+
+
+    <div class="col-md-6">
+      <div class="box box-widget">
+        <div class="box-footer">
+          <form action="<?= base_url('home/create_post') ?>" method="post"> <img class="img-responsive img-circle img-sm" src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="Alt Text">
+            <div class="img-push"> <input type="text" class="form-control input-sm" name="status" placeholder="Press enter to post Status"> </div>
+            <br>
+            <div class="form-group">
+              <input type="submit" class="btn btn-secondary" value="Post Status">
             </div>
+          </form>
         </div>
-    </div>
-</div>
-</section>
-
-<div class="page-content page-container" id="page-content">
-    <div class="padding">
-        <div class="row container d-flex justify-content-center">
-            <div class="col-md-6">
-                <div class="box box-widget">
-                    <div class="box-header with-border">
-                        <div class="user-block"> <img class="img-circle" src="https://img.icons8.com/color/36/000000/guest-male.png" alt="User Image"> 
-                        <span class="username"><a href="#" data-abc="true">Kun_ku_Kun</a></span> <span class="description">Public - 7:30 PM Today</span> </div>
-                        <div class="box-tools"> <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="" data-original-title="Mark as read"> 
-                            <button type="button" class="bx bx-trash"></button> 
-                            <button type="button" class="bx bx-pencil"></button> </div>
-                    </div>
-                    <div class="box-body"> <img class="img-responsive pad" src="https://cdn-image.hipwee.com/wp-content/uploads/2016/04/hipwee-alam-750x422.jpg" alt="Photo">
-                        <p>Sampai bertemu dititik terindah menurut takdir.</p> 
-                        <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button> 
-                        <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</button> 
-                        <span class="pull-right text-muted">1287 likes - 2 comments</span>
-                    </div>
-                    <div class="box-footer box-comments">
-                        <div class="box-comment"> <img class="img-circle img-sm" src="https://img.icons8.com/office/36/000000/person-female.png" alt="User Image">
-                            <div class="comment-text"> <span class="username"> Tami Zuu <span class="text-muted pull-right">8:03 PM Today</span> </span> Siapa tu yang di tunggu dititik itu wkwkwk </div>
-                        </div>
-                        <div class="box-comment"> <img class="img-circle img-sm" src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="User Image">
-                            <div class="comment-text"> <span class="username"> Smit Janson <span class="text-muted pull-right">8:03 PM Today</span> </span> Slebew gak sehh. </div>
-                        </div>
-                    </div>
-                    <div class="box-footer">
-                        <form action="#" method="post"> <img class="img-responsive img-circle img-sm" src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="Alt Text">
-                            <div class="img-push"> <input type="text" class="form-control input-sm" placeholder="Press enter to post comment " </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- ======= end isian  ======= -->
-
- 
-
-    <!-- ======= About Us Section ======= -->
-    <section id="about" class="about">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Tentang Kami</h2>
-        </div>
-
-        <div class="row content">
-          <div class="col-lg-6">
-            <p>
-              Sebuah Web Social Media yang akan mempermudah penggunanya dengan fitur yang kami miliki.
-            </p>
-            <ul>
-              <li><i class="ri-check-double-line"></i> User Interface yang baik</li>
-              <li><i class="ri-check-double-line"></i> User Merasa mudah menggunakan ini</li>
-              <li><i class="ri-check-double-line"></i> Post dan Download feed dengan cepat tanpa hambatan</li>
-            </ul>
       </div>
-    </section><!-- End About Us Section -->
+      <?php
+      foreach ($post as $obj) {
+      ?>
+        <div class="box box-widget">
+          <div class="box-header with-border">
+            <div class="user-block"> <img class="img-circle" src="https://img.icons8.com/color/36/000000/guest-male.png" alt="User Image">
+              <span class="username"><a href="#" data-abc="true"><?= $obj->name ?></a></span> <span class="description">Public - <?= date('H:i', strtotime($obj->entry_date)) ?> </span>
+            </div>
+            <div class="box-tools">
+              <?php if (session('id_user') == $obj->id_user) {
+              ?>
+                <a href="<?= base_url('home/hide_post/' . $obj->id_post) ?>">
+                  <button type="button" class="bx bx-trash"></button>
+                </a>
+              <?php
+              }
+              ?>
+
+            </div>
+          </div>
+          <div class="box-body">
+            <p><?= $obj->status ?></p>
+            <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
+            <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</button>
+            <span class="pull-right text-muted">0 likes - <?= $obj->jumlah_komentar ?> comments</span>
+          </div>
+          <div class="box-footer box-comments">
+            <?php
+            foreach ($obj->comment as $obj1) {
+            ?>
+              <div class="box-comment"> <img class="img-circle img-sm" src="https://img.icons8.com/office/36/000000/person-female.png" alt="User Image">
+                <div class="comment-text"> <span class="username"> <?= $obj1->name ?><span class="text-muted pull-right"><?= date('H:i', strtotime($obj->entry_date)) ?> </span> </span> <?= $obj1->comment ?> </div>
+
+                <p>
+                  <a href="<?= base_url('home/delete_comment/' . $obj1->id_comment) ?>">Hapus</a>
+                </p>
+              </div>
+            <?php
+            }
+            ?>
+
+          </div>
+          <div class="box-footer">
+            <form action="<?= base_url('home/create_comment') ?>" method="post"> <img class="img-responsive img-circle img-sm" src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="Alt Text">
+              <div class="img-push">
+                <input type="hidden" class="form-control input-sm" name="id_post" value='<?= $obj->id_post ?>' placeholder="Press enter to post comment">
+                <input type="text" class="form-control input-sm" name="comment" placeholder="Press enter to post comment">
+              </div>
+              <br>
+              <div class="form-group">
+                <input type="submit" class="btn btn-secondary" value="Add Comment">
+              </div>
+            </form>
+          </div>
+        </div>
+      <?php
+      }
+      ?>
+
+
+    </div>
+
+
+
+
+
+  </div>
+
+  <!-- ======= end isian  ======= -->
+
+
+
+  <!-- ======= About Us Section ======= -->
+  <section id="about" class="about">
+    <div class="container" data-aos="fade-up">
+
+      <div class="section-title">
+        <h2>Tentang Kami</h2>
+      </div>
+
+      <div class="row content">
+        <div class="col-lg-6">
+          <p>
+            Sebuah Web Social Media yang akan mempermudah penggunanya dengan fitur yang kami miliki.
+          </p>
+          <ul>
+            <li><i class="ri-check-double-line"></i> User Interface yang baik</li>
+            <li><i class="ri-check-double-line"></i> User Merasa mudah menggunakan ini</li>
+            <li><i class="ri-check-double-line"></i> Post dan Download feed dengan cepat tanpa hambatan</li>
+          </ul>
+        </div>
+  </section><!-- End About Us Section -->
 
   <!-- ======= Footer ======= -->
   <footer id="footer">
@@ -190,9 +207,6 @@
         <!-- Licensing information: https://bootstrapmade.com/license/ -->
         <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/ -->
       </div>
-
-    
-    
     </div>
   </footer><!-- End Footer -->
 

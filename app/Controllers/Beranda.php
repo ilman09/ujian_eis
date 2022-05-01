@@ -7,7 +7,7 @@ use CodeIgniter\RESTful\ResourceController;
 class Beranda extends ResourceController
 {
     public function __construct() {
-        $this->berandaModel = new BerandaModel();
+       
     }
     /**
      * Return an array of resource objects, themselves in array format
@@ -89,6 +89,25 @@ class Beranda extends ResourceController
      */
     public function delete($id = null)
     {
-        //
+        $berandas = $this->session->get('berandas');
+        $data = null;
+
+        $_new_berandas = [];
+
+        foreach ($berandas as $item) {
+            if ($item['id'] == $id) {
+                $data = $item;
+                continue;
+            }
+
+            array_push($_new_berandas, $item);
+        }
+
+        if (!$data) {
+            throw new \Exception("Data not found!");
+        }
+
+        $this->session->set('berandas', $_new_berandas);
+        return redirect()->to('/beranda');
     }
 }

@@ -32,12 +32,8 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
-$routes->group('', ['filter' => 'authMiddleware'], function($routes) {
-    $routes->resource('beranda');
-});
 
-$routes->resource('register');
-$routes->resource('login');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
